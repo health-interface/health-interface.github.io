@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" type="text/css" href="styles.css">
+    <head>
+        <title>Interface</title>
+    </head>
+    <body>
+        <a href="interface.html" class="previous arrow" style="z-index: 99999; position:relative; float:left; margin-top:35px; margin-left:45px;">&laquo; Previous </a>
+        <br />
+
+        <div class="headers"> Dr. Smith</div>
+        <div class="wrapper" style="position:relative; height: 60em;"> <!--border: solid medium yellow; -->
+            <div id="conversation" class="conversation" style="position:relative; height: 50em;"><!-- border: solid medium blue;-->
+            	<div id = "doctor" class="doctor">
+            		Hello! I’m Dr. Smith. <br \>
+            		Can you tell me what your blood sugar was when you woke up this morning?
+            	</div>
+            </div>
+            <div id=part_input style="border: solid medium grey; position: relative;background-color: rgba(230,230,230,1.0); ">
+                <input type="text" autofocus id="p_input" placeholder="Message the doctor..." style="padding: 2px 20px;font-size:24pt;height:50px;width:1275px;">
+                <!--<input type="text" name="p_input" autofocus placeholder="Message the doctor..." style="padding: 2.5em 55em;">
+                 button type="submit">
+                    <img src="images/send.png" style="width:50px; height:50px;"/>
+                </button> 
+                <input type="submit" style="background:url('images/send.png');" alt="Submit" value="Submit"> -->
+                <input type="image" src="images/send.png" id="submit" border="0" alt="Submit" style="width:50px; height:50px;float:right; margin-right: 3.6em;" /> 
+                
+            </div>
+        </div>
+    </body>
+
+    <script type="text/javascript">
+        i = 0;
+        who_last = "doctor";
+        document.getElementById("doctor").style.opacity=100;
+        var clicked = document.getElementById("submit").addEventListener("click", meaningful);
+        var pressed = document.getElementById("submit").addEventListener("keypress", function(e){
+             if  (13 ===e.keyCode;
+            if (key === 13) {
+                meaningful;
+            }
+        });
+        
+        var arr=["At breakfast?","At lunch?","At dinner?", "Thanks!"];
+        //var i = 0
+
+        function doctorSays(msg) {
+            var newMessage = document.createElement('div');
+            newMessage.classList.add('doctor');
+            newMessage.innerText = msg;
+            document.getElementById('conversation').append(newMessage);
+        };
+        
+
+        function meaningful(){
+            var fix_focus = document.getElementById("p_input").focus();
+            if (who_last == "patient"){
+                return;
+            }
+            if (document.getElementById("p_input").value.trim() == "" || document.getElementById("p_input").value == " "){
+                return;
+            }
+            var p_input=document.getElementById("p_input").value;
+            var newMessage = document.createElement('div');
+            newMessage.classList.add('patient');
+            newMessage.innerText = p_input;
+            document.getElementById('conversation').append(newMessage);
+            who_last = "patient";
+            document.getElementById("p_input").value='';
+            var random_time=setTimeout(function(){
+                while((i < arr.length) && who_last=="patient"){
+                    doctorSays(arr[i]);
+                    i++;
+                    who_last="doctor";
+                }
+                if (i==arr.length) {
+                    document.getElementById("submit").disabled = true;
+                    //filter: grayscale(100%);
+                    document.getElementById("submit").classList.add("disabled");
+                }
+            }, (1000 + (Math.floor(Math.random()*1000))));
+        };
+    </script>
+</html> 
