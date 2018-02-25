@@ -34,10 +34,9 @@
         who_last = "doctor";
         document.getElementById("doctor").style.opacity=100;
         var clicked = document.getElementById("submit").addEventListener("click", meaningful);
-        var pressed = document.getElementById("submit").addEventListener("keypress", function(e){
-             if  (13 ===e.keyCode;
-            if (key === 13) {
-                meaningful;
+        var pressed = document.getElementById("p_input").addEventListener("keypress", function(e){
+             if  (13 === e.keyCode){
+                meaningful();
             }
         });
         
